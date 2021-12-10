@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'Frutiger';
+  src: local('Frutiger'), url(./assets/fonts/Frutiger.woff) format('woff');
+}
+@font-face {
+  font-family: 'Frutiger Bold';
+  src: local('Frutiger_bold'),
+    url(./assets/fonts/Frutiger_bold.woff) format('woff');
+}
+
+@import './styles/layout.scss';
