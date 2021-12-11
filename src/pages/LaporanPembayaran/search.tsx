@@ -7,7 +7,13 @@ import * as Comp from '../../components';
 
 const SearchPembayaran = () => {
   const {
-    laporanPembayaran: { handleStateForm, getLaporanPembayaran },
+    laporanPembayaran: {
+      handleStateForm,
+      getLaporanPembayaran,
+      getDownload,
+      searchForm: { startDate, endDate },
+      clearSearchForm,
+    },
   } = useStores();
   const [form] = Form.useForm();
 
@@ -24,6 +30,14 @@ const SearchPembayaran = () => {
     [handleStateForm]
   );
 
+  const onDownloadExcel = useCallback(() => {
+    getDownload();
+  }, [getDownload]);
+
+  const onClear = useCallback(() => {
+    clearSearchForm();
+    form.resetFields();
+  }, [clearSearchForm, form]);
   return (
     <Collapse collapsible='header' defaultActiveKey={['1']}>
       <Collapse.Panel header='Search Laporan Pembayaran' key='1'>
@@ -47,7 +61,22 @@ const SearchPembayaran = () => {
               </Form.Item>
             </Col>
           </Row>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              gap: '0.5rem',
+            }}
+          >
+            <Button size='middle' danger onClick={onClear}>
+              Clear
+            </Button>
+            <Button
+              onClick={onDownloadExcel}
+              disabled={startDate === '' && endDate === '' ? true : false}
+            >
+              Download Excel
+            </Button>
             <Button type='primary' size='middle' htmlType='submit'>
               Cari Data Pembayaran
             </Button>

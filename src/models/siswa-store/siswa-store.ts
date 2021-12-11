@@ -88,6 +88,20 @@ export const SiswaStoreModel = types
 
       return false;
     }),
+
+    deleteOne: flow(function* (id: number) {
+      const { app } = getRoot(self);
+
+      app.setLoading(true);
+      const result = yield self.environment.SiswaAPI.deleteOneSiswa(id);
+      app.setLoading(false);
+
+      if (result.kind === 'ok') {
+        return true;
+      } else {
+        return false;
+      }
+    }),
   }));
 
 export interface ISiswaModel extends Instance<typeof SiswaStoreModel> {}

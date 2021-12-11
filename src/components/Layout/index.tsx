@@ -55,7 +55,7 @@ const url_string = window.location.href;
 const urlParams = new URL(url_string);
 
 const SidebarMenu = observer(({ dark, setVisible }: SidebarMenuProps) => {
-  const { app, siswa, laporanPembayaran } = useStores();
+  const { app, siswa, laporanPembayaran, pembayaran } = useStores();
   const history = useHistory();
 
   const handleClick = useCallback(
@@ -66,9 +66,11 @@ const SidebarMenu = observer(({ dark, setVisible }: SidebarMenuProps) => {
         siswa.clearData();
       } else if (key === 'viewReport') {
         laporanPembayaran.clearData();
+      } else if (key === 'pembayaran') {
+        pembayaran.clearSearch();
       }
     },
-    [app, history, siswa, laporanPembayaran]
+    [app, history, siswa, laporanPembayaran, pembayaran]
   );
 
   return (

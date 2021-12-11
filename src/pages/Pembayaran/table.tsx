@@ -109,7 +109,7 @@ const TableSiswa = () => {
               align='start'
             >
               <div className='info-siswa'>
-                <Title level={5}>Nama : {siswa.nama}</Title>
+                {siswa.nama && <Title level={5}>Nama : {siswa.nama}</Title>}
                 {siswa?.tanggal_masuk && (
                   <Text>
                     Bergabung sejak,{' '}
@@ -117,9 +117,11 @@ const TableSiswa = () => {
                   </Text>
                 )}
               </div>
-              <div className='price-siswa'>
-                <Title level={5}>Tagihan Rp. 60000</Title>
-              </div>
+              {siswa.nama && (
+                <div className='price-siswa'>
+                  <Title level={5}>Tagihan Rp. 60000</Title>
+                </div>
+              )}
             </Space>
             <Table
               columns={columns()}

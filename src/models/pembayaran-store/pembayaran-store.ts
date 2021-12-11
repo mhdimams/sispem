@@ -67,8 +67,14 @@ export const PembayaranStoreModel = types
     clearTransaksiBayar() {
       applySnapshot(self, { ...self, transaksiBayar: {} });
     },
+
     clearSearch() {
-      applySnapshot(self, { ...self, search: {} });
+      applySnapshot(self, {
+        ...self,
+        search: {},
+        dataPembayaran: [],
+        siswa: {},
+      });
     },
     handleStateSearch(field: string, value: string | boolean | number) {
       applySnapshot(self, {
@@ -134,8 +140,9 @@ export const PembayaranStoreModel = types
       // const namaSiswa = self.siswa.nama.split(' ').join('_');
       // const filename = `Invoice_${namaSiswa}_${self.search.tahun}_${bulan}.pdf`;
 
-      const result = yield self.environment.PembayaranAPI.getDownload({siswa_id: self.siswa.id,  tahun: self.search.tahun, bulan: bulan}
-        ,app.token
+      const result = yield self.environment.PembayaranAPI.getDownload(
+        { siswa_id: self.siswa.id, tahun: self.search.tahun, bulan: bulan },
+        app.token
       );
 
       app.setLoading(false);

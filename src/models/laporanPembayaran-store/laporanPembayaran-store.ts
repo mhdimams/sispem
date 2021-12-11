@@ -45,7 +45,7 @@ export const LaporanPembayaranModel = types
     },
 
     clearSearchForm() {
-      applySnapshot(self, { ...self, searchForm: {} });
+      applySnapshot(self, { ...self, searchForm: {}, dataList: [] });
     },
 
     getLaporanPembayaran: flow(function* () {
@@ -63,6 +63,29 @@ export const LaporanPembayaranModel = types
       if (result.kind === 'ok') {
         self.dataList = result.data;
       } else {
+        SwalError(result.message);
+      }
+    }),
+
+    getDownload: flow(function* () {
+      const { app } = getRoot(self);
+
+      app.setLoading(true);
+
+      // const namaSiswa = self.siswa.nama.split(' ').join('_');
+      // const filename = `Invoice_${namaSiswa}_${self.search.tahun}_${bulan}.pdf`;
+
+      const result = yield self.environment.PembayaranAPI.getDownloadExcel(
+        {
+          startDate: self.searchForm.startDate,
+          endDate: self.searchForm.endDate,
+        },
+        app.token
+      );
+
+      app.setLoading(false);
+
+      if (result.kind !== 'ok') {
         SwalError(result.message);
       }
     }),

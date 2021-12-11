@@ -40,8 +40,9 @@ const Login = () => {
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                alignItems: 'flex-start',
+                alignItems: 'center',
                 flexDirection: 'row',
+                marginBottom: '0.8rem',
               }}
             >
               <Title
@@ -52,17 +53,27 @@ const Login = () => {
               >
                 Login, Administrator
               </Title>
-              <Title
-                level={4}
-                onClick={() => history.push('/pembayaran-siswa')}
+              <div
                 style={{
                   color: '#2980b9',
-                  cursor: 'pointer',
+
                   margin: 0,
                 }}
               >
-                Lihat Tagihan Siswa
-              </Title>
+                <button
+                  style={{
+                    padding: '0.5rem 1.5rem',
+                    borderRadius: '25px',
+                    fontWeight: 500,
+                    backgroundColor: 'transparent',
+                    border: '2px solid #2980b9',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => history.push('/pembayaran-siswa')}
+                >
+                  Lihat Tagihan Siswa
+                </button>
+              </div>
             </div>
             <Form
               form={form}
@@ -95,7 +106,9 @@ const Login = () => {
               </Form.Item>
 
               <Form.Item>
-                <Button htmlType='submit'>Sign In</Button>
+                <Button htmlType='submit' type='primary'>
+                  Sign In
+                </Button>
               </Form.Item>
             </Form>
           </div>

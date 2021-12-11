@@ -20,6 +20,7 @@ export interface ApiConfig {
   siswa: Crud;
   pembayaran: Crud;
   laporanPembayaran: string;
+  downloadLaporan: string;
   downloadPembayaran: string;
   /**
    * Milliseconds before we timeout the request.
@@ -40,12 +41,15 @@ export const DEFAULT_API_CONFIG: ApiConfig = {
     getOne: '/siswa/findbynameorid',
     create: '/siswa',
     update: '/siswa/:id',
+    delete: '/siswa/delete/:id',
   },
   pembayaran: {
     get: '/pembayaran/siswapertahun',
     update: '/pembayaran/transaksibayar',
   },
   laporanPembayaran: '/pembayaran/laporan-pembayaran',
+  downloadLaporan: '/pembayaran/download-laporan',
   downloadPembayaran: '/pembayaran/invoice',
+
   timeout: 60000,
 };

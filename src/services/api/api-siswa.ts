@@ -81,4 +81,20 @@ export class SiswaAPI {
       return { kind: 'bad-data', message: 'Not expected format' };
     }
   }
+
+  public async deleteOneSiswa(id: number): Promise<Types.ResultNoData> {
+    try {
+      const result = await PATCH(
+        this.url + this.config.siswa.delete?.replace(':id', id.toString()),
+        {}
+      );
+      if (result.status !== 200) {
+        const problem = getGeneralApiProblem(result.status, result.res);
+        if (problem) return problem;
+      }
+      return { kind: 'ok', data: '', message: '' };
+    } catch (error) {
+      return { kind: 'bad-data', message: 'Not expected format' };
+    }
+  }
 }

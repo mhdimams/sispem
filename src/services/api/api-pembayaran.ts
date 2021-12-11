@@ -80,11 +80,33 @@ export class PembayaranAPI {
       return { kind: 'bad-data', message: 'Not expected format' };
     }
   }
+
   public async getDownload(data: any, token: string) {
     try {
-       await POST_DOWNLOAD(
+      await POST_DOWNLOAD(
         this.url + this.config.downloadPembayaran,
-        {...data},
+        { ...data },
+        HeaderAuth(token)
+      );
+
+      // if (result.status && result.status !== 200) {
+      //   const problem = getGeneralApiProblem(result.status, {
+      //     message: 'Failed to Download',
+      //   });
+      //   if (problem) return problem;
+      // }
+
+      return { kind: 'ok', message: '' };
+    } catch (error) {
+      return { kind: 'bad-data', message: 'Not expected format' };
+    }
+  }
+
+  public async getDownloadExcel(data: any, token: string) {
+    try {
+      await POST_DOWNLOAD(
+        this.url + this.config.downloadLaporan,
+        { ...data },
         HeaderAuth(token)
       );
 
