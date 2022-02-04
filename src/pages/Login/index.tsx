@@ -34,6 +34,7 @@ const Login = () => {
     <Comp.BlockUi isLoading={isLoading}>
       <main className='login-container full-screen'>
         <section className='left-area'>
+          <div className='bg-logo'></div>
           <div className='login-content'>
             <div
               className='login-title'

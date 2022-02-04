@@ -1,7 +1,7 @@
 import { ApiConfig, DEFAULT_API_CONFIG } from './api-config';
 import * as Types from './api.types';
 import { getGeneralApiProblem } from './api-problem';
-import { POST_LOGIN } from './API';
+import { POST, POST_LOGIN } from './API';
 
 export class AuthAPI {
   config: ApiConfig;
@@ -26,6 +26,24 @@ export class AuthAPI {
         if (problem) return problem;
       }
 
+      return { kind: 'ok', data: result.res.data, message: '' };
+    } catch (error) {
+      return { kind: 'bad-data', message: 'Not expected format' };
+    }
+  }
+
+  public async changePassword(body: {
+    oldPassword: string;
+    newPassword: string;
+    newPasswordConfirmation: string;
+  }): Promise<Types.ResultNoData> {
+    try {
+      const result = await POST(this.url + this.config.changePassword, body);
+
+      if (result.status !== 200) {
+        const problem = getGeneralApiProblem(result.status, result.res);
+        if (problem) return problem;
+      }
       return { kind: 'ok', data: result.res.data, message: '' };
     } catch (error) {
       return { kind: 'bad-data', message: 'Not expected format' };

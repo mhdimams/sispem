@@ -122,4 +122,25 @@ export class PembayaranAPI {
       return { kind: 'bad-data', message: 'Not expected format' };
     }
   }
+
+  public async downloadPembayaranSiswaPertahun(data: any, token: string) {
+    try {
+      await POST_DOWNLOAD(
+        this.url + this.config.downloadPembayaranPertahun,
+        { ...data },
+        HeaderAuth(token)
+      );
+
+      // if (result.status && result.status !== 200) {
+      //   const problem = getGeneralApiProblem(result.status, {
+      //     message: 'Failed to Download',
+      //   });
+      //   if (problem) return problem;
+      // }
+
+      return { kind: 'ok', message: '' };
+    } catch (error) {
+      return { kind: 'bad-data', message: 'Not expected format' };
+    }
+  }
 }

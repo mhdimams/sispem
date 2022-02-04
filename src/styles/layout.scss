@@ -11,13 +11,25 @@
 .left-area {
   width: 100%;
   height: 100vh;
-
+  position: relative;
   .login-content {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0 4rem;
+    z-index: 999;
+  }
+
+  .bg-logo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('../assets/images/logo-sidebar.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.1;
   }
 }
 

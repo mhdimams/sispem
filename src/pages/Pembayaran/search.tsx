@@ -7,7 +7,13 @@ import * as Comp from '../../components';
 
 const SearchPembayaran = () => {
   const {
-    pembayaran: { masterSiswa, handleStateSearch, getDataPembayaran },
+    app: { token },
+    pembayaran: {
+      masterSiswa,
+      handleStateSearch,
+      getDataPembayaran,
+      downloadPembayaran,
+    },
   } = useStores();
   const [form] = Form.useForm();
 
@@ -15,6 +21,12 @@ const SearchPembayaran = () => {
     await form.validateFields();
     await getDataPembayaran();
   }, [getDataPembayaran, form]);
+
+  const onDownloadLaporanPembayaran = useCallback(async () => {
+    await form.validateFields();
+
+    await downloadPembayaran();
+  }, [form, downloadPembayaran]);
 
   return (
     <Collapse collapsible='header' defaultActiveKey={['1']}>
@@ -58,6 +70,16 @@ const SearchPembayaran = () => {
             </Col>
           </Row>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            {token && (
+              <Button
+                type='ghost'
+                size='middle'
+                style={{ marginRight: '0.5rem' }}
+                onClick={onDownloadLaporanPembayaran}
+              >
+                Download Laporan Pembayaran
+              </Button>
+            )}
             <Button type='primary' size='middle' htmlType='submit'>
               Cari Data Pembayaran
             </Button>

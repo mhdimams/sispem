@@ -92,7 +92,7 @@ export const PembayaranStoreModel = types
       if (result.kind === 'ok') {
         self.masterSiswa = result.data.map((item: any) => ({
           id: item.id.toString(),
-          label: item.nama,
+          label: `${item.nama} - ${item.nis}`,
         }));
       } else {
         SwalError(result.message);
@@ -148,6 +148,27 @@ export const PembayaranStoreModel = types
       app.setLoading(false);
 
       console.log(result);
+      if (result.kind !== 'ok') {
+        SwalError(result.message);
+      }
+    }),
+
+    downloadPembayaran: flow(function* () {
+      const { app } = getRoot(self);
+
+      app.setLoading(true);
+
+      const result =
+        yield self.environment.PembayaranAPI.downloadPembayaranSiswaPertahun(
+          {
+            siswa_id: self.search.siswa_id,
+            tahun: self.search.tahun,
+          },
+          app.token
+        );
+
+      app.setLoading(false);
+
       if (result.kind !== 'ok') {
         SwalError(result.message);
       }

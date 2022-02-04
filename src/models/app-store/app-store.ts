@@ -5,7 +5,7 @@ import {
   applySnapshot,
   flow,
 } from 'mobx-state-tree';
-import { SwalError } from '../../utils/sweetalert';
+import { SwalError, SwallSuccess } from '../../utils/sweetalert';
 
 import { withEnvironment } from '../extensions/with-environment';
 
@@ -68,6 +68,25 @@ export const AppStoreModel = types
         return false;
       }
     }),
+
+    changePassword: flow(function* (data: {
+      oldPassword: string;
+      newPassword: string;
+      newPasswordConfirmation: string;
+    }) {
+      self.isLoading = true;
+      const result = yield self.environment.AuthAPI.changePassword(data);
+      self.isLoading = false;
+
+      if (result.kind === 'ok') {
+        cookie.remove('PEMTOKEN');
+        self.token = '';
+        SwallSuccess({});
+      } else {
+        SwalError('Authentikasi Gagal');
+      }
+    }),
+
     logout() {
       cookie.remove('PEMTOKEN');
       self.token = '';

@@ -17,6 +17,7 @@ export const SiswaModel = types.model('SiswaModel').props({
   nomor_handphone: types.optional(types.string, ''),
   tanggal_masuk: types.optional(types.string, ''),
   id: types.optional(types.number, 0),
+  nis: types.optional(types.number, 0),
 });
 
 export const SiswaStoreModel = types

@@ -22,6 +22,8 @@ export interface ApiConfig {
   laporanPembayaran: string;
   downloadLaporan: string;
   downloadPembayaran: string;
+  downloadPembayaranPertahun: string;
+  changePassword: string;
   /**
    * Milliseconds before we timeout the request.
    */
@@ -49,7 +51,8 @@ export const DEFAULT_API_CONFIG: ApiConfig = {
   },
   laporanPembayaran: '/pembayaran/laporan-pembayaran',
   downloadLaporan: '/pembayaran/download-laporan',
+  downloadPembayaranPertahun: '/pembayaran/siswa-tahun',
   downloadPembayaran: '/pembayaran/invoice',
-
+  changePassword: '/auth/change-password',
   timeout: 60000,
 };

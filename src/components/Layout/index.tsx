@@ -8,6 +8,7 @@ import {
   FileSyncOutlined,
   UploadOutlined,
   FileSearchOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -29,6 +30,12 @@ interface SidebarMenuProps {
 }
 
 const menu: IMenu[] = [
+  {
+    key: 'myProfile',
+    label: 'My Profile',
+    url: '/my-profile',
+    icon: <UserOutlined />,
+  },
   {
     key: 'siswa',
     label: 'Siswa',

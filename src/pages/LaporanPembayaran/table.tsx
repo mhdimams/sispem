@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
-import { Collapse, Space, Table, Typography, Button } from 'antd';
+import React from 'react';
+import { Collapse, Space, Table, Typography } from 'antd';
 import moment from 'moment';
 import { observer } from 'mobx-react-lite';
 
 import { useStores } from '../../models';
+import parseNumber from '../../utils/parseNumber';
 
 const { Text } = Typography;
 const TableSiswa = () => {
@@ -22,6 +23,7 @@ const TableSiswa = () => {
         title: 'Pembayaran',
         dataIndex: 'pembayaran',
         key: 'pembayaran',
+        render: (text: string) => `Rp. ${parseNumber(text)}`,
       },
       {
         title: 'Tanggal Bayar',

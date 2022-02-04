@@ -4,6 +4,7 @@ import moment from 'moment';
 import { observer } from 'mobx-react-lite';
 import FormPembayaran from './form';
 import { useStores } from '../../models';
+import parseNumber from '../../utils/parseNumber';
 
 const { Title, Text } = Typography;
 const TableSiswa = () => {
@@ -58,6 +59,7 @@ const TableSiswa = () => {
         title: 'Pembayaran',
         dataIndex: 'pembayaran',
         key: 'pembayaran',
+        render: (text: string) => `Rp. ${parseNumber(text)}`,
       },
       {
         title: 'Status',
@@ -123,6 +125,7 @@ const TableSiswa = () => {
                 </div>
               )}
             </Space>
+
             <Table
               columns={columns()}
               dataSource={dataPembayaran.slice()}

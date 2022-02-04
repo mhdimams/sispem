@@ -57,6 +57,11 @@ const TableSiswa = () => {
 
   const columns = [
     {
+      title: 'NIS',
+      dataIndex: 'nis',
+      key: 'nis',
+    },
+    {
       title: 'Nama',
       dataIndex: 'nama',
       key: 'nama',
