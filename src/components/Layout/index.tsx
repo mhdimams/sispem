@@ -8,7 +8,6 @@ import {
   FileSyncOutlined,
   UploadOutlined,
   FileSearchOutlined,
-  UserOutlined,
 } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -30,12 +29,6 @@ interface SidebarMenuProps {
 }
 
 const menu: IMenu[] = [
-  {
-    key: 'myProfile',
-    label: 'My Profile',
-    url: '/my-profile',
-    icon: <UserOutlined />,
-  },
   {
     key: 'siswa',
     label: 'Siswa',
@@ -105,8 +98,10 @@ const SidebarMenu = observer(({ dark, setVisible }: SidebarMenuProps) => {
 
 const PageLayout = ({ children }: PageLayoutProps) => {
   const {
-    app: { nama, logout },
+    app: { logout },
   } = useStores();
+
+  const history = useHistory();
 
   const [visible, setVisible] = useState(false);
 
@@ -114,6 +109,12 @@ const PageLayout = ({ children }: PageLayoutProps) => {
     logout();
   }, [logout]);
 
+  const handleClick = useCallback(
+    (key: string, url: string) => {
+      history.push({ pathname: url, search: urlParams.search });
+    },
+    [history]
+  );
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider
@@ -127,8 +128,12 @@ const PageLayout = ({ children }: PageLayoutProps) => {
       </Sider>
       <Layout className='site-layout'>
         <Header className='layout-header'>
-          <div className='header-name'>
-            Hi! <b>{nama}</b>
+          <div
+            className='header-name'
+            onClick={() => handleClick('myProfile', '/my-profile')}
+            style={{ cursor: 'pointer' }}
+          >
+            My Profile
           </div>
           <div style={{ cursor: 'pointer' }} onClick={onLogout}>
             Logout
