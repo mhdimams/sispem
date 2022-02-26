@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "npm": "please-use-yarn",
     "node": ">= 14.17.1",
     "yarn": ">= 1.22.0"
   },
